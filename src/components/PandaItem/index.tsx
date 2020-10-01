@@ -1,4 +1,3 @@
-import { render } from '@testing-library/react';
 import React from 'react';
 
 interface Props {
@@ -29,7 +28,7 @@ class PandaItem extends React.Component<Props> {
 const PandaItem = ({ name, interests, onPress }: Props) => {
   //const { name, interests, onPress } = props;
   return (
-    <div onClick={onPress}>
+    <div onClick={onPress} role="panda">
       <h1>{name}</h1>
       {interests && (
         <ul>
