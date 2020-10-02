@@ -1,4 +1,5 @@
 import React from 'react';
+import HobbieList from '../HobbiesList';
 
 interface Props {
   name: string;
@@ -30,13 +31,7 @@ const PandaItem = ({ name, interests, onPress }: Props) => {
   return (
     <div onClick={onPress} role="panda">
       <h1>{name}</h1>
-      {interests && (
-        <ul>
-          {interests.map((interest) => {
-            return <li key={interest}>{interest}</li>;
-          })}
-        </ul>
-      )}
+      {interests && <HobbieList interests={interests} />}
     </div>
   );
 };
