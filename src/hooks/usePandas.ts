@@ -1,14 +1,13 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../redux/store';
-import { Panda } from '../types/Panda';
 import { slice } from '../redux/pandas';
+import { getPandas, getPandasError, isPandasFetching } from '../redux/pandas/selectors';
+import { Panda } from '../types/Panda';
 
 const usePandas = () => {
-  const pandas: Panda[] = useSelector((state: AppState) => state.pandas.data);
-  const loading: boolean = useSelector((state: AppState) => state.pandas.fetching);
-  const error: Error | undefined = useSelector((state: AppState) => state.pandas.error);
+  const pandas: Panda[] = useSelector(getPandas);
+  const loading: boolean = useSelector(isPandasFetching);
+  const error: Error | undefined = useSelector(getPandasError);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(slice.actions.loadPandasRequest());

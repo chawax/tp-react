@@ -1,8 +1,9 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import NotFoundPage from './containers/NotFoundPage';
+import PandaDetailsPage from './containers/PandaDetailsPage';
 import PandasListPage from './containers/PandasListPage';
 import { store } from './redux/store';
 import theme from './theme';
@@ -14,8 +15,11 @@ const App = () => (
         <h1>My pandas</h1>
       </header>
       <BrowserRouter>
-        <Route path="/" component={PandasListPage} exact />
-        <Route component={NotFoundPage} />
+        <Switch>
+          <Route path="/" component={PandasListPage} exact />
+          <Route path="/pandas/:id" component={PandaDetailsPage} />
+          <Route component={NotFoundPage} />
+        </Switch>
       </BrowserRouter>
     </Provider>
   </ThemeProvider>

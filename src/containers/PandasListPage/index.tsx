@@ -1,17 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PandasList from '../../components/PandasList';
 import usePandas from '../../hooks/usePandas';
 import { AppState } from '../../redux/store';
 import { Panda } from '../../types/Panda';
 import { slice as userSlice } from '../../redux/user';
-
-const displayPanda = (panda: Panda) => {
-  alert(`panda ${panda.name} was pressed`);
-};
+import { useHistory } from 'react-router-dom';
 
 const PandasListPage = () => {
   const { pandas, loading, error } = usePandas();
+  const history = useHistory();
+
+  const displayPanda = useCallback(
+    (panda: Panda) => {
+      history.push(`/pandas/${panda.key}`);
+    },
+    [history],
+  );
 
   useEffect(() => {
     if (error) {
